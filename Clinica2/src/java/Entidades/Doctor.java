@@ -1,6 +1,11 @@
 
 package Entidades;
 
+import Conexion.Conexion;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
 /**
  *
  * @author javil
@@ -16,12 +21,14 @@ public class Doctor {
     String diagnosticoPaciente;
     String recetaPaciente;
     String detalleConsulta;
+    private String sentencia;
     
-   public Doctor(){
-       
+   public Doctor()throws ClassNotFoundException,SQLException{
+       Conexion con;
    }
    
-    public Doctor(int id, String nombre, String apellido, String especialidad, String paciente, String horaAtencion, String fechaAtencion, String diagnosticoPaciente, String recetaPaciente, String detallePaciente){
+    public Doctor(int id, String nombre, String apellido, String especialidad, String paciente, String horaAtencion, String fechaAtencion, String diagnosticoPaciente, String recetaPaciente, String detallePaciente)throws ClassNotFoundException,SQLException{
+        Conexion con;
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -114,6 +121,17 @@ public class Doctor {
     public void setDetalleConsulta(String detalleConsulta) {
         this.detalleConsulta = detalleConsulta;
     }
-    
+     public ArrayList<Doctor> obtenerDoctor() throws SQLException, ClassNotFoundException{
+   String sentencia = "select Id, doctores from doctores ";
+      ArrayList <Doctor> doctores= new ArrayList();
+  ResultSet re = Conexion.consultarSQL(sentencia);
+  while(re.next()){
+      doctores.add(new Doctor(re.getInt("Id"),re.getString("nombre"),re.getString("apellido"),re.getString("especialidad"),re.getString("paciente"),re.getString("horaAtencion"),re.getString("fechaAtencion"),re.getString("diagnosticoPaciente"),re.getString("RecetaPaciente"),re.getString("detalleConsulta")));
+      
+     
+  }
+  
+      return doctores;
+  }
     
 }
