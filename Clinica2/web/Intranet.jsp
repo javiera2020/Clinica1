@@ -20,18 +20,21 @@
         <form>
             <table>
                 <tr>
+                    <td>Id</td>
                     <td>Paciente</td>
                     <td>Doctor</td>
                     <td>HoraAtencion</td>
+                    <td>FechaAtencion</td>
                     <td>Consulta</td>
-                    <td>Receta</td>
+                    
                 </tr>
                 <tr>
+                    <td><input type="number" name="id" value=""/></td>  
                     <td><input type="text" name="paciente" value=""/></td>  
                     <td><input type="text" name="doctor" value=""/></td>  
-                    <td><input type="date" name="HoraAtencion" value=""/></td>  
+                    <td><input type="time" name="HoraAtencion" value=""/></td>  
+                    <td><input type="date" name="fechaAtencion" value=""/></td> 
                     <td><input type="text" name="consulta" value=""/></td>  
-                    <td><input type="text" name="receta" value=""/></td>  
                     <td>
                         <input type="submit" value="Agregar"/>
                     </td>
@@ -41,31 +44,10 @@
                         </a>
                     </td>
                 </tr>
-                
-                <% ArrayList<Paciente> paciente = new ArrayList();
-                if(session.getAttribute("paciente")!=null){
-                    paciente =(ArrayList) session.getAttribute("paciente");
-                }
-                for(Paciente p: paciente){
-                    %>
-                    <tr>
-                        <td><%=p.getId()%></td>
-                        <td><%=p.getNombre()%></td>
-                        <td><%=p.getApellido()%></td>
-                        <td><%=p.getFechaNacimiento()%></td>
-                        <td><%=p.getDireccion()%></td>
-                        <td><%=p.getCiudad()%></td>
-                        <td><%=p.getComuna()%></td>
-                        <td><%=p.getDiagnostico()%></td>
-                        <td><%=p.getReceta()%></td>
-                        <td><%=p.getHoraAtencion()%></td>
-                        <td><%=p.getFechaAtencion()%></td>
-                        <td><a href="ModificarP.jsp?Id=<%=p.getId()%>">
-                                <input type="button" value="Modificar"/>
-                            </a>
-                    </tr>
-              <%}%>
             </table>
+        <% if (request.getParameter("mensaje")!=null){%>
+        <%=request.getParameter("mensaje")%>
+        <%}%>
         </form>
         </center>
     </body>
