@@ -1,11 +1,17 @@
 
 package Entidades;
 
+import Conexion.Conexion;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
 /**
  *
  * @author javil
  */
 public class Consulta {
+    Conexion con;
     int id;
     String hora;
     String fecha;
@@ -14,12 +20,13 @@ public class Consulta {
     String nombreDoctor;
     String especialidadDoctor;         
     
-    public Consulta(){
-        
+    public Consulta()throws ClassNotFoundException,SQLException{
+    Conexion con = new Conexion(); 
     } 
     
-    public Consulta(int id, String hora, String fecha, String paciente, String detalle, String nombreDoctor, String especialidadDoctor){
-               this.id = id;
+    public Consulta(int id, String hora, String fecha, String paciente, String detalle, String nombreDoctor, String especialidadDoctor)throws ClassNotFoundException,SQLException{
+       Conexion con = new Conexion();
+        this.id = id;
         this.hora = hora;
         this.fecha = fecha;
         this.paciente = paciente;
@@ -83,5 +90,16 @@ public class Consulta {
     public void setEspecialidadDoctor(String especialidadDoctor) {
         this.especialidadDoctor = especialidadDoctor;
     }
-    
+   public ArrayList<Consulta> obtenerConsulta() throws SQLException, ClassNotFoundException{
+   String sentencia = "select Id, consulta from consulta ";
+   
+  ArrayList <Consulta> consulta = new ArrayList();
+  ResultSet re = Conexion.consultarSQL(sentencia);
+  while(re.next()){
+      consulta.add(new Consulta(re.getInt("Id"),re.getString("Descripcion"),re.getString("Fecha"),re.getString("Hora"),re.getString("NombrePaciente")));
+     
+  }
+  
+      return consulta;
+  }
 }
