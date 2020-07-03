@@ -13,26 +13,26 @@ import java.util.ArrayList;
 public class Consulta {
     Conexion con;
     int id;
+    String descripcion;
     String hora;
     String fecha;
-    String paciente;
-    String detalle;
-    String nombreDoctor;
-    String especialidadDoctor;         
+    String nombrePaciente;
+    
+    
+         
     
     public Consulta()throws ClassNotFoundException,SQLException{
     Conexion con = new Conexion(); 
     } 
     
-    public Consulta(int id, String hora, String fecha, String paciente, String detalle, String nombreDoctor, String especialidadDoctor)throws ClassNotFoundException,SQLException{
+    public Consulta(int id, String Descripcion, String hora, String fecha, String nombrePaciente)throws ClassNotFoundException,SQLException{
        Conexion con = new Conexion();
         this.id = id;
+        this.descripcion = descripcion;
         this.hora = hora;
         this.fecha = fecha;
-        this.paciente = paciente;
-        this.detalle = detalle;
-        this.nombreDoctor = nombreDoctor;
-        this.especialidadDoctor= especialidadDoctor; 
+        this.nombrePaciente = nombrePaciente;
+       
     } 
 
     public int getId() {
@@ -41,6 +41,14 @@ public class Consulta {
 
     public void setId(int id) {
         this.id = id;
+    }
+    
+        public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
     public String getHora() {
@@ -59,37 +67,14 @@ public class Consulta {
         this.fecha = fecha;
     }
 
-    public String getPaciente() {
-        return paciente;
+    public String getNombrePaciente() {
+        return nombrePaciente;
     }
 
-    public void setPaciente(String paciente) {
-        this.paciente = paciente;
+    public void setNombrePaciente(String nombrePaciente) {
+        this.nombrePaciente = nombrePaciente;
     }
 
-    public String getDetalle() {
-        return detalle;
-    }
-
-    public void setDetalle(String detalle) {
-        this.detalle = detalle;
-    }
-
-    public String getNombreDoctor() {
-        return nombreDoctor;
-    }
-
-    public void setNombreDoctor(String nombreDoctor) {
-        this.nombreDoctor = nombreDoctor;
-    }
-
-    public String getEspecialidadDoctor() {
-        return especialidadDoctor;
-    }
-
-    public void setEspecialidadDoctor(String especialidadDoctor) {
-        this.especialidadDoctor = especialidadDoctor;
-    }
    public ArrayList<Consulta> obtenerConsulta() throws SQLException, ClassNotFoundException{
    String sentencia = "select Id, consulta from consulta ";
    
