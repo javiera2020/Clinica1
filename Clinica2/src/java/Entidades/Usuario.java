@@ -1,28 +1,45 @@
 
 package Entidades;
 
+import Conexion.Conexion;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
  * @author javil
  */
 public class Usuario {
-        private String usuario;
-    private String nombre;
-    private String apellido;
-    private String password;
+     Conexion con; 
+     int Id;
+     String usuario;
+     String nombre;
+     String apellido;
+     String password;
  
     public Usuario ()throws ClassNotFoundException,SQLException{
         
+        
+        Conexion con = new Conexion();
     }
     public Usuario (String usuario, String nombre, String apellido, String password)throws ClassNotFoundException,SQLException{
+       Conexion con = new Conexion();
+        this.Id = Id;
         this.usuario = usuario;
         this.nombre = nombre;
         this.apellido = apellido;
         this.password = password;
  
    }
+
+    public int getId() {
+        return Id;
+    }
+
+    public void setId(int Id) {
+        this.Id = Id;
+    }
 
     public String getUsuario() {
         return usuario;
@@ -56,5 +73,16 @@ public class Usuario {
         this.password = password;
     }
     
-    
+   public ArrayList<Usuario> obtenerUsuario() throws SQLException, ClassNotFoundException{
+   String sentencia = "select Id, usuario from usuario ";
+   
+  ArrayList <Usuario> usuario = new ArrayList();
+  ResultSet re = Conexion.consultarSQL(sentencia);
+  while(re.next()){
+      usuario.add(new Usuario (re.getInt("Id"),re.getString("usuario"),re.getString("nombre"),re.getString("apellido"),re.getString("password")));
+     
+  }
+  
+      return usuario;
+  }
 }
