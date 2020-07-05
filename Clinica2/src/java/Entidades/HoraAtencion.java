@@ -1,6 +1,11 @@
 
 package Entidades;
 
+import Conexion.Conexion;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
 /**
  *
  * @author javil
@@ -14,12 +19,12 @@ public class HoraAtencion {
    String descripcion;
    String nombreMedico;
    
-   public HoraAtencion(){
-       
+   public HoraAtencion()throws ClassNotFoundException,SQLException{
+       Conexion con;
    }
    
-   public HoraAtencion(int id, String fecha, String hora, String paciente, String tipoMedico, String descripcion, String nombreMedico){
-       
+   public HoraAtencion(int id, String fecha, String hora, String paciente, String tipoMedico, String descripcion, String nombreMedico)throws ClassNotFoundException,SQLException{
+       Conexion con;
        this.id = id;
        this.fecha = fecha;
        this.hora = hora;
@@ -85,5 +90,16 @@ public class HoraAtencion {
         this.nombreMedico = nombreMedico;
     }
    
+      public ArrayList<HoraAtencion> obtenerHoraAtencion() throws SQLException, ClassNotFoundException{
+   String sentencia = "select Id, horaAtencion from horaAtencion ";
    
+  ArrayList <HoraAtencion> horaAtencion = new ArrayList();
+  ResultSet re = Conexion.consultarSQL(sentencia);
+  while(re.next()){
+      horaAtencion.add(new HoraAtencion  (re.getInt("Id"),re.getString("Fecha"),re.getString("Hora"),re.getString("Paciente"),re.getString("tipoMedico"),re.getString("descripcion"),re.getString("nombreMedico")));
+     
+  }
+  
+      return horaAtencion ;
+  }
 }
