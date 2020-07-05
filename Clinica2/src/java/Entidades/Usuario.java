@@ -1,6 +1,8 @@
 
 package Entidades;
 
+import java.sql.SQLException;
+
 /**
  *
  * @author javil
@@ -11,10 +13,10 @@ public class Usuario {
     private String apellido;
     private String password;
  
-    public Usuario (){
+    public Usuario ()throws ClassNotFoundException,SQLException{
         
     }
-    public Usuario (String usuario, String nombre, String apellido, String password){
+    public Usuario (String usuario, String nombre, String apellido, String password)throws ClassNotFoundException,SQLException{
         this.usuario = usuario;
         this.nombre = nombre;
         this.apellido = apellido;
