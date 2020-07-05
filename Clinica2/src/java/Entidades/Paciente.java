@@ -1,12 +1,18 @@
 
 package Entidades;
 
+import Conexion.Conexion;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
 /**
  *
  * @author javil
  */
 public class Paciente {
-       int id;
+   Conexion con;
+    int id;
    String nombre;
    String apellido;
    String fechaNacimiento;
@@ -18,11 +24,14 @@ public class Paciente {
    String horaAtencion;
    String fechaAtencion;
  
-   public Paciente (){
-       
+   public Paciente ()throws ClassNotFoundException,SQLException{
+     Conexion con = new Conexion(); 
+      
    }
    
-    public Paciente (int id, String nombre, String apellido,String fechaNacimiento,String direccion, String ciudad,String comuna,String diagnostico,String receta,String horaAtencion,String fechaAtencion){
+    public Paciente (int id, String nombre, String apellido,String fechaNacimiento,String direccion, String ciudad,String comuna,String diagnostico,String receta,String horaAtencion,String fechaAtencion)throws ClassNotFoundException,SQLException{
+    Conexion con = new Conexion(); 
+    
     this.id = id;
     this.nombre = nombre;
     this.apellido = apellido;
@@ -124,6 +133,17 @@ public class Paciente {
     public void setFechaAtencion(String fechaAtencion) {
         this.fechaAtencion = fechaAtencion;
     }
-    
+       public ArrayList<Paciente> obtenerPaciente() throws SQLException, ClassNotFoundException{
+   String sentencia = "select Id, paciente from paciente ";
+   
+  ArrayList <Paciente> paciente = new ArrayList();
+  ResultSet re = Conexion.consultarSQL(sentencia);
+  while(re.next()){
+      paciente.add(new Paciente(re.getInt("Id"),re.getString("nombre"),re.getString("apellido"),re.getString("fechaNacimiento"),re.getString("direccion"),re.getString("ciudad"),re.getString("comuna"),re.getString("diagnostico"), re.getString("receta"),re.getString("horaAtencion"),re.getString("fechaAtencion")));
+     
+  }
+  
+      return paciente;
+  }
     
 }
