@@ -1,6 +1,11 @@
 
 package Entidades;
 
+import Conexion.Conexion;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
 /**
  *
  * @author javil
@@ -83,5 +88,17 @@ public class Receta {
         this.nombreDoctor = nombreDoctor;
     }
     
+  public ArrayList<Receta> obtenerReceta() throws SQLException, ClassNotFoundException{
+   String sentencia = "select Id, receta from receta ";
+   
+  ArrayList <Receta> receta = new ArrayList();
+  ResultSet re = Conexion.consultarSQL(sentencia);
+  while(re.next()){
+      receta.add(new Receta(re.getInt("Id"),re.getString("descripcion"),re.getString("nombrePaciente"),re.getString("apellidoPaciente"),re.getString("fechaEmision"),re.getString("horaEmision"),re.getString("nombreDoctor")));
+     
+  }
+  
+      return receta;
+  }
     
 }
