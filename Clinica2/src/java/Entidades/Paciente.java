@@ -12,7 +12,7 @@ import java.util.ArrayList;
  */
 public class Paciente {
    Conexion con;
-    int id;
+   int id;
    String nombre;
    String apellido;
    String fechaNacimiento;
