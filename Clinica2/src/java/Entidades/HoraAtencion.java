@@ -11,7 +11,8 @@ import java.util.ArrayList;
  * @author javil
  */
 public class HoraAtencion {
-       int id;
+   Conexion con;
+   int id;
    String fecha;
    String hora;
    String paciente;
@@ -20,11 +21,11 @@ public class HoraAtencion {
    String nombreMedico;
    
    public HoraAtencion()throws ClassNotFoundException,SQLException{
-       Conexion con;
+      Conexion con = new Conexion();
    }
    
    public HoraAtencion(int id, String fecha, String hora, String paciente, String tipoMedico, String descripcion, String nombreMedico)throws ClassNotFoundException,SQLException{
-       Conexion con;
+       Conexion con = new Conexion();
        this.id = id;
        this.fecha = fecha;
        this.hora = hora;
